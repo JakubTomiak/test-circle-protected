@@ -102,16 +102,30 @@ common-config: &common-config
     - run: |
         echo "test common"
 
+
+jobs:
+  tests_done:
+    executor: base
+    steps:
+      - run: echo "DONE"
+  build_app1:
+    <<: *common-config
+  build_app2:
+    <<: *common-config   
+  build_app3:
+    <<: *common-config
+
+    
 workflows:
   just-this-one:
     jobs:
-      - build-app1
-      - build-app2
-      - build-app3
+      - build_app1
+      - build_app2
+      - build_app3
       - tests-done:
           requires:
-            - build-app1
-            - build-app2
-            - build-app3
+            - build_app1
+            - build_app2
+            - build_app3
 
 
