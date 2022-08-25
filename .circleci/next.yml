@@ -74,7 +74,7 @@ common-config: &common-config
   executor: base
   steps:
     - run:
-        name: stop early unless relevant
+        name: skip build as not needed
         command: |
           # DEBUG
           printenv build_app1 || true
