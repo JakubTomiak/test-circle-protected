@@ -115,14 +115,14 @@ jobs:
   build_app3:
     <<: *common-config
 
-    
+
 workflows:
   just-this-one:
     jobs:
       - build_app1
       - build_app2
       - build_app3
-      - tests-done:
+      - tests_done:
           requires:
             - build_app1
             - build_app2
