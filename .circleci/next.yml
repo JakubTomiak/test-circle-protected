@@ -10,7 +10,7 @@ parameters:
   build_app3:
     type: boolean
     default: false
-  trigger-all:
+  trigger_all:
     type: boolean
     default: false
 
