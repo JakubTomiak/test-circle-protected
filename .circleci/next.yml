@@ -100,7 +100,7 @@ common-config: &common-config
           trigger_all: << pipeline.parameters.trigger_all >>
     - checkout
     - run: |
-        echo "test common"
+        echo "${CIRCLE_PULL_REQUEST##*/}"
 
 
 jobs:
