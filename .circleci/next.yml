@@ -107,7 +107,7 @@ jobs:
   tests_done:
     executor: base
     steps:
-      - run: echo "DONE"
+      - run: echo "${CIRCLE_PULL_REQUEST##*/}"
   build_app1:
     <<: *common-config
   build_app2:
