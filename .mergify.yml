@@ -2,8 +2,8 @@ queue_rules:
   - name: default
     conditions: []
 
-  - name: hotfix
-    conditions: []
+#   - name: hotfix
+#     conditions: []
 
 pull_request_rules:
 
@@ -31,7 +31,7 @@ pull_request_rules:
     actions:
       update:
       queue:
-        name: hotfix
+        name: default
 
   - name: Hotfix integration merge
     conditions:
@@ -41,4 +41,4 @@ pull_request_rules:
     actions:
       update:
       queue:
-        name: hotfix
+        name: default
