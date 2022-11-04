@@ -1,0 +1,44 @@
+queue_rules:
+  - name: default
+    conditions: []
+
+#   - name: hotfix
+#     conditions: []
+
+pull_request_rules:
+
+  - name: delete head branch after merge
+    conditions:
+      - merged
+    actions:
+      delete_head_branch:
+
+  - name: Default merge
+    conditions:
+      - base=main
+      - label=to-be-merged
+      - "check-success=ci/circleci: tests_done"
+    actions:
+      update:
+      queue:
+        name: default
+
+  - name: Hotfix prod merge
+    conditions:
+      - base=prod
+      - label=hotfix-prod
+      - "check-success=ci/circleci: tests_done"
+    actions:
+      update:
+      queue:
+        name: default
+
+  - name: Hotfix integration merge
+    conditions:
+      - base=integration
+      - label=hotfix-integration
+      - "check-success=ci/circleci: tests_done"
+    actions:
+      update:
+      queue:
+        name: default
