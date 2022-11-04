@@ -15,7 +15,7 @@ pull_request_rules:
 
   - name: Default merge
     conditions:
-      - base=main
+      - base=feature/TD-1234
       - label=to-be-merged
       - "check-success=ci/circleci: tests_done"
     actions:
