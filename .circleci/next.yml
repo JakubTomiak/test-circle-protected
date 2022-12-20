@@ -96,41 +96,42 @@ common-config: &common-config
         environment:
           build_app1: << pipeline.parameters.build_app1 >>
           build_app2: << pipeline.parameters.build_app2 >>
+          build_app3: << pipeline.parameters.build_app3 >>
           trigger_all: << pipeline.parameters.trigger_all >>
     - checkout
     - run: |
         echo "${CIRCLE_PULL_REQUEST##*/}"
 
-common-config2: &common-config2
-  executor: base
-  steps:
-    - run:
-        name: skip build as not needed
-        command: |
-          # DEBUG
-          printenv build_app1 || true
-          printenv build_app2 || true
-          printenv build_app3 || true
-          printenv trigger_all || true
-          # see https://circleci.com/docs/env-vars#built-in-environment-variables
-          # CIRCLE_JOB returns the name of the job (e.g., "build-app1", "build-app2", etc)
-          # so, TO_CONTINUE will evaluate and be set to the value of the env var that matches the current job's name
-          export TO_CONTINUE=$(eval echo "\$$CIRCLE_JOB")
-          printenv TO_CONTINUE
-          # env vars are string values
-          if [ "${TO_CONTINUE}" != "1" ] && [ "${trigger_all}" != "1" ]; then
-            # we stop the job early if:
-            # $trigger_all is NOT TRUE or
-            # env var based on job name says FALSE
-            circleci-agent step halt
-          fi
-        environment:
-          build_app3: << pipeline.parameters.build_app1 >>
-          build_app2: << pipeline.parameters.build_app2 >>
-          trigger_all: << pipeline.parameters.trigger_all >>
-    - checkout
-    - run: |
-        echo "${CIRCLE_PULL_REQUEST##*/}"
+# common-config2: &common-config2
+#   executor: base
+#   steps:
+#     - run:
+#         name: skip build as not needed
+#         command: |
+#           # DEBUG
+#           printenv build_app1 || true
+#           printenv build_app2 || true
+#           printenv build_app3 || true
+#           printenv trigger_all || true
+#           # see https://circleci.com/docs/env-vars#built-in-environment-variables
+#           # CIRCLE_JOB returns the name of the job (e.g., "build-app1", "build-app2", etc)
+#           # so, TO_CONTINUE will evaluate and be set to the value of the env var that matches the current job's name
+#           export TO_CONTINUE=$(eval echo "\$$CIRCLE_JOB")
+#           printenv TO_CONTINUE
+#           # env vars are string values
+#           if [ "${TO_CONTINUE}" != "1" ] && [ "${trigger_all}" != "1" ]; then
+#             # we stop the job early if:
+#             # $trigger_all is NOT TRUE or
+#             # env var based on job name says FALSE
+#             circleci-agent step halt
+#           fi
+#         environment:
+#           build_app3: << pipeline.parameters.build_app1 >>
+#           build_app2: << pipeline.parameters.build_app2 >>
+#           trigger_all: << pipeline.parameters.trigger_all >>
+#     - checkout
+#     - run: |
+#         echo "${CIRCLE_PULL_REQUEST##*/}"
 
 jobs:
   tests_done:
@@ -142,7 +143,7 @@ jobs:
   build_app2: #kubeflyr 
     <<: *common-config   
   build_app3: #atlas
-    <<: *common-config2
+    <<: *common-config
 
 
 workflows:
