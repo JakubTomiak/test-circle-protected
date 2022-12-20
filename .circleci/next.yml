@@ -96,7 +96,6 @@ common-config: &common-config
         environment:
           build_app1: << pipeline.parameters.build_app1 >>
           build_app2: << pipeline.parameters.build_app2 >>
-          build_app3: << pipeline.parameters.build_app3 >>
           trigger_all: << pipeline.parameters.trigger_all >>
     - checkout
     - run: |
