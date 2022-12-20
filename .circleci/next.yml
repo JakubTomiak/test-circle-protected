@@ -1,34 +1,3 @@
-Skip to content
-Search or jump to…
-Pull requests
-Issues
-Codespaces
-Marketplace
-Explore
- 
-@JakubTomiak 
-JakubTomiak
-/
-test-circle-protected
-Public
-Code
-Issues
-Pull requests
-3
-Actions
-Projects
-Wiki
-Security
-Insights
-Settings
-test-circle-protected/.circleci/next.yml
-@JakubTomiak
-JakubTomiak Update next.yml
-Latest commit 4251d1d on Sep 23
- History
- 1 contributor
-131 lines (119 sloc)  3.16 KB
-
 version: 2.1
 
 parameters:
