@@ -10,32 +10,32 @@ workflows:
   check-required-builds:
     jobs:
       - path/filter:
+          base-revision: master
           config-path: .circleci/next.yml
           mapping: |
             apps/app1/.* build_app1 true 
             apps/app2/.* build_app2 true 
             apps/app3/.* build_app3 true 
             .circleci/.* trigger_all true
-        config-path: .circleci/next.yml
-        filters:
-          branches:
-            ignore:
-            - /^integration.*/
-            - /^hotfix-integration\/.*/
-            - /^prod.*/
-            - /^hotfix-prod\/.*/
+          filters:
+            branches:
+              ignore:
+              - /^integration.*/
+              - /^hotfix-integration\/.*/
+              - /^prod.*/
+              - /^hotfix-prod\/.*/
             
       - path/filter:
           config-path: .circleci/next.yml
+          base-revision: master
           mapping: |
             apps/app1/.* build_app1 true 
             apps/app2/.* build_app2 true 
             apps/app3/.* build_app3 true 
             .circleci/.* trigger_all true
-        config-path: .circleci/next.yml
-        filters:
-          branches:
-            only:
-            - /^prod.*/
-            - /^hotfix-prod\/.*/
+          filters:
+            branches:
+              only:
+              - /^prod.*/
+              - /^hotfix-prod\/.*/
 
