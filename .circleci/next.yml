@@ -75,8 +75,7 @@ workflows:
           filters:
             branches:
               only:
-                - master
-
+                - main
       - build_app3:
            filters:
             branches:
