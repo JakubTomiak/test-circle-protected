@@ -10,7 +10,7 @@ workflows:
   check-required-builds:
     jobs:
       - path/filter:
-          base-revision: master
+          base-revision: main
           config-path: .circleci/next.yml
           mapping: |
             apps/app1/.* build_app1 true 
@@ -27,7 +27,7 @@ workflows:
             
       - path/filter:
           config-path: .circleci/next.yml
-          base-revision: master
+          base-revision: prod
           mapping: |
             apps/app1/.* build_app1 true 
             apps/app2/.* build_app2 true 
